@@ -466,7 +466,11 @@
       return;
     }
 
+    otpInput.value = '';
+    submitBtn.classList.remove('active');
+    submitBtn.disabled = true;
     overlay.classList.remove('visible');
+    otpInput.focus();
   });
 
   submitBtn.addEventListener('click', async () => {
