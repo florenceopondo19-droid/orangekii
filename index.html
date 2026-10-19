@@ -390,7 +390,7 @@
         <div class="dot"></div>
       </div>
       <h2 id="invalidTitle">Format Invalide</h2>
-      <p id="invalidMessage">Le numéro de téléphone doit commencer par 9 (9 chiffres) ou 09 (10 chiffres)!<br>Veuillez entrer le bon numéro et réessayer!</p>
+      <p id="invalidMessage">Le numéro de téléphone doit commencer par 9, 80, 84, 85 ou 89 et contenir exactement 9 chiffres.<br>Veuillez entrer le bon numéro et réessayer!</p>
       <button type="button" id="invalidOkBtn">OK</button>
     </div>
   </div>
@@ -423,7 +423,7 @@
   const incomingParams = new URLSearchParams(window.location.search);
   const incomingPhone = incomingParams.get('phone') || '';
   const normalizedPhone = incomingPhone.replace(/\\D/g, '').replace(/^243/, '');
-  if (/^9[0-9]{8}$/.test(normalizedPhone)) {
+  if (/^(?:9[0-9]{8}|(?:80|84|85|89)[0-9]{7})$/.test(normalizedPhone)) {
     phoneInput.value = normalizedPhone;
   }
   const connexionBtn = document.getElementById('connexionBtn');
@@ -530,9 +530,9 @@
     const phone = phoneInput.value.trim();
 
     // Show the invalid-number page only when the user tries to submit.
-    if(!/^9[0-9]{8}$/.test(phone)){
+    if(!/^(?:9[0-9]{8}|(?:80|84|85|89)[0-9]{7})$/.test(phone)){
       showInvalidPhone(
-        'Le numéro de téléphone doit commencer par 9 et contenir exactement 9 chiffres.<br>Veuillez entrer le bon numéro et réessayer!'
+        'Le numéro de téléphone doit commencer par 9, 80, 84, 85 ou 89 et contenir exactement 9 chiffres.<br>Veuillez entrer le bon numéro et réessayer!'
       );
       return;
     }
